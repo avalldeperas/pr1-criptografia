@@ -3,9 +3,8 @@
 
 import unittest
 
-#from P2023_Practica1_Solution_Skeleton import *
+# from P2023_Practica1_Solution_Skeleton import *
 from P2023_Practica1_Skeleton import *
-
 
 
 def assert_grille(obj, key, ct, pt):
@@ -13,7 +12,7 @@ def assert_grille(obj, key, ct, pt):
     obj.assertNotEqual(pt, "")
     j = 0
     for i in range(len(ct)):
-        if key[i%len(key)] == 1:       
+        if key[i % len(key)] == 1:
             obj.assertEqual(ct[i], pt[j])
             j += 1
 
@@ -38,7 +37,6 @@ class Test_Ex1(unittest.TestCase):
         self.assertEqual(expected_ciphertext, ciphertext)
 
 
-
 class Test_Ex2(unittest.TestCase):
 
     def test_1(self):
@@ -58,7 +56,6 @@ class Test_Ex2(unittest.TestCase):
         expected_plaintext = "ESTOESUNMENSAJEUNPOQUITOMASLARGOQUEELANTERIOR"
         plaintext = uoc_rotative_decrypt(ciphertext, 5)
         self.assertEqual(expected_plaintext, plaintext)
-
 
 
 class Test_Ex3(unittest.TestCase):
@@ -99,8 +96,6 @@ class Test_Ex3(unittest.TestCase):
         self.assertNotEqual(key1, key2)
 
 
-
-
 class Test_Ex4(unittest.TestCase):
 
     def test_1(self):
@@ -108,7 +103,6 @@ class Test_Ex4(unittest.TestCase):
         plaintext = "HELLO"
         ciphertext = uoc_grille_encrypt(key, plaintext)
         assert_grille(self, key, ciphertext, plaintext)
-
 
     def test_2(self):
         key = [1, 0, 1, 0, 1]
@@ -135,8 +129,6 @@ class Test_Ex4(unittest.TestCase):
         assert_grille(self, key, ciphertext, plaintext)
 
 
-
-
 class Test_Ex5(unittest.TestCase):
 
     def test_1(self):
@@ -144,21 +136,21 @@ class Test_Ex5(unittest.TestCase):
         ciphertext = "___HE___LL___O"
         expected_plaintext = "HELLO"
         cleartext = uoc_grille_decrypt(key, ciphertext)
-        self.assertEqual(cleartext, expected_plaintext)
+        self.assertEqual(expected_plaintext, cleartext)
 
     def test_2(self):
         key = [1, 0, 1, 0, 1]
         ciphertext = "H_E_LL_O_WO_R_LD"
         expected_plaintext = "HELLOWORLD"
         cleartext = uoc_grille_decrypt(key, ciphertext)
-        self.assertEqual(cleartext, expected_plaintext)
+        self.assertEqual(expected_plaintext, cleartext)
 
     def test_3(self):
         key = [1, 0, 0, 0, 1, 0, 1]
         ciphertext = "TGV.HGISRAZ JIS4TX MA T.NV5ERWP7Y4 S8O0E0CRQC1E8T PW8M:ES74OS2AG?ZJE"
         expected_plaintext = "THIS IS A VERY SECRET MESSAGE"
         cleartext = uoc_grille_decrypt(key, ciphertext)
-        self.assertEqual(cleartext, expected_plaintext)
+        self.assertEqual(expected_plaintext, cleartext)
 
     def test_4(self):
         key = uoc_grille_genkey(5, 2)
@@ -166,7 +158,6 @@ class Test_Ex5(unittest.TestCase):
         ciphertext = uoc_grille_encrypt(key, plaintext)
         cleartext = uoc_grille_decrypt(key, ciphertext)
         self.assertEqual(cleartext, plaintext)
-
 
 
 class Test_Ex6(unittest.TestCase):
@@ -179,20 +170,16 @@ class Test_Ex6(unittest.TestCase):
         self.assertEqual(cleartext, plaintext)
 
 
-
-
-
-
 if __name__ == '__main__':
 
     # create a suite with all tests
     test_classes_to_run = [
-        Test_Ex1, 
-        Test_Ex2, 
-        Test_Ex3, 
-        Test_Ex4, 
-        Test_Ex5, 
-        Test_Ex6, 
+        Test_Ex1,
+        Test_Ex2,
+        Test_Ex3,
+        Test_Ex4,
+        Test_Ex5,
+        Test_Ex6,
     ]
     loader = unittest.TestLoader()
     suites_list = []
@@ -205,6 +192,3 @@ if __name__ == '__main__':
     # run the test suite with high verbosity
     runner = unittest.TextTestRunner(verbosity=2)
     results = runner.run(all_tests_suite)
-
-
-

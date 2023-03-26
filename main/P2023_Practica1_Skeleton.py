@@ -105,8 +105,27 @@ def uoc_grille_encrypt(key, plaintext):
     ciphertext = ""
 
     #### IMPLEMENTATION GOES HERE ####
-
+    print(f'***key = {key}, keySize ={len(key)}, charsToAdd = {sum(key)}, plaintext = {plaintext}, plaintextSize {len(plaintext)}')
+    times = len(plaintext) // sum(key)
+    remainder = len(plaintext) % sum(key)
+    iterations = times + remainder
+    print(f'***times={times}, remainder={remainder}, iterations={iterations}')
+    k = 0
+    for i in range(iterations):
+        for j in range(len(key)):
+            value = key[j]
+            if value > 0 & k < len(plaintext):
+                print(f'Key value is: {value} - [{i}][{j}]taken char from plaintext! {plaintext[k]} - k = {k}')
+                char_chosen = plaintext[k]
+                k += 1
+            else:
+                char_chosen = ABC[random.randint(0, len(ABC) - 1)]
+                print(f'[{i}][{j}]taken random char... {char_chosen}')
+            ciphertext += char_chosen
+            if k >= len(plaintext):
+                break
     # --------------------------------
+    print(f'ciphertext = {ciphertext}')
 
     return ciphertext
 
@@ -121,8 +140,14 @@ def uoc_grille_decrypt(key, ciphertext):
 
     plaintext = ""
 
-    #### IMPLEMENTATION GOES HERE ####
+    #### IMPLEMENTATION GOES HERE ###
+    for i in range(len(ciphertext)):
+        position = i % len(key)
+        key_value = key[position]
+        if key_value == 1:
+            plaintext += ciphertext[i]
 
+    print(f'plaintext = {plaintext}')
     # --------------------------------
 
     return plaintext
@@ -139,7 +164,9 @@ def uoc_encrypt(key, plaintext):
     ciphertext = ""
 
     #### IMPLEMENTATION GOES HERE ####
-
+    shift = sum(key)
+    shifted_text = uoc_rotative_encrypt(plaintext, shift)
+    ciphertext = uoc_grille_encrypt(key, shifted_text)
     # --------------------------------
 
     return ciphertext
@@ -156,7 +183,9 @@ def uoc_decrypt(key, ciphertext):
     plaintext = ""
 
     #### IMPLEMENTATION GOES HERE ####
-
+    shifted_result = uoc_grille_decrypt(key, ciphertext)
+    shift = sum(key)
+    plaintext = uoc_rotative_decrypt(shifted_result, shift)
     # --------------------------------
 
     return plaintext
