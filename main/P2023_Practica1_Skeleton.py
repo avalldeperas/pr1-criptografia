@@ -105,27 +105,27 @@ def uoc_grille_encrypt(key, plaintext):
     ciphertext = ""
 
     #### IMPLEMENTATION GOES HERE ####
-    print(f'***key = {key}, keySize ={len(key)}, charsToAdd = {sum(key)}, plaintext = {plaintext}, plaintextSize {len(plaintext)}')
-    times = len(plaintext) // sum(key)
-    remainder = len(plaintext) % sum(key)
-    iterations = times + remainder
-    print(f'***times={times}, remainder={remainder}, iterations={iterations}')
+    print(f'***key = {key}, plaintext = {plaintext}')
     k = 0
-    for i in range(iterations):
-        for j in range(len(key)):
-            value = key[j]
+    done = False
+    # loop 1 until we have covered all plaintext chars
+    while not done:
+        # looping key array
+        for i in range(len(key)):
+            value = key[i]
+            # if value is 1 AND we haven't covered all chars in plaintext, then add plaintext char
             if value > 0 & k < len(plaintext):
-                print(f'Key value is: {value} - [{i}][{j}]taken char from plaintext! {plaintext[k]} - k = {k}')
                 char_chosen = plaintext[k]
                 k += 1
-            else:
-                char_chosen = ABC[random.randint(0, len(ABC) - 1)]
-                print(f'[{i}][{j}]taken random char... {char_chosen}')
+            else:  # otherwise add a random char from our custom alphabet
+                char_chosen = random.choice(ABC)
             ciphertext += char_chosen
+            # if we have covered all chars in plaintext, then finish looping
             if k >= len(plaintext):
+                done = True
                 break
-    # --------------------------------
     print(f'ciphertext = {ciphertext}')
+    # --------------------------------
 
     return ciphertext
 
