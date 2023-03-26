@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import random
-import string
 
 ABC = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 .,:?"
 
@@ -24,15 +23,18 @@ def uoc_rotative_encrypt(message, shift):
     ciphertext = ""
 
     #### IMPLEMENTATION GOES HERE ####
+    print(f'message = {message}, shift {shift}')
     for i in range(len(message)):
         char = message[i]
-        position = ABC.index(char)
-        shifted_position = (position + shift) % len(ABC)
+        # get position of char in our alphabet
+        current_position = ABC.index(char)
+        # add shift to position with module of alphabet
+        shifted_position = (current_position + shift) % len(ABC)
+        # get shifted char in alphabet
         shifted_char = ABC[shifted_position]
-        print(f'{char} ({position}) + {shift} --> {shifted_char} ({shifted_position})')
+        # append shifted char
         ciphertext += shifted_char
-
-    print(f'ciphertext {ciphertext}')
+    print(f'ciphertext = {ciphertext}')
     # --------------------------------
 
     return ciphertext
@@ -50,14 +52,13 @@ def uoc_rotative_decrypt(message, shift):
 
     #### IMPLEMENTATION GOES HERE ####
     for i in range(len(message)):
-        char = message[i]
-        position = ABC.index(char)
-        shifted_position = (position - shift) % len(ABC)
-        shifted_char = ABC[shifted_position]
-        print(f'{char} ({position}) + {shift} --> {shifted_char} ({shifted_position})')
+        shifted_char = message[i]
+        shifted_position = ABC.index(shifted_char)
+        # this time we extract shift value from current position with module of alphabet
+        real_position = (shifted_position - shift) % len(ABC)
+        shifted_char = ABC[real_position]
         plaintext += shifted_char
-
-    print(f'plaintext {plaintext}')
+    print(f'plaintext = {plaintext}')
     # --------------------------------
 
     return plaintext
@@ -86,7 +87,7 @@ def uoc_grille_genkey(grille_len, num_holes):
             pending_num_holes = num_holes - sum(key)
             if pending_iterations <= pending_num_holes:
                 value = 1
-        # Set whatever value
+        # Set calculated value
         key.append(value)
     print(f'key = {key}')
     # --------------------------------
@@ -105,7 +106,7 @@ def uoc_grille_encrypt(key, plaintext):
     ciphertext = ""
 
     #### IMPLEMENTATION GOES HERE ####
-    print(f'***key = {key}, plaintext = {plaintext}')
+    print(f'key = {key}, plaintext = {plaintext}')
     k = 0
     done = False
     # loop 1 until we have covered all plaintext chars
@@ -141,12 +142,15 @@ def uoc_grille_decrypt(key, ciphertext):
     plaintext = ""
 
     #### IMPLEMENTATION GOES HERE ###
+    print(f'key = {key}, ciphertext = {ciphertext}')
     for i in range(len(ciphertext)):
+        # get position by position i with module of key length
         position = i % len(key)
+        # get value from this position
         key_value = key[position]
+        # if we find a 1 we append it as it's a char from the plaintext
         if key_value == 1:
             plaintext += ciphertext[i]
-
     print(f'plaintext = {plaintext}')
     # --------------------------------
 
@@ -164,8 +168,11 @@ def uoc_encrypt(key, plaintext):
     ciphertext = ""
 
     #### IMPLEMENTATION GOES HERE ####
+    # as per requirements of PR1, the sum of holes (ones inside the key array) is the shift value
     shift = sum(key)
+    # we first shift the plaintext using the already built method from exercise 1
     shifted_text = uoc_rotative_encrypt(plaintext, shift)
+    # we then cipher the text using the grille method built in exercise 4
     ciphertext = uoc_grille_encrypt(key, shifted_text)
     # --------------------------------
 
@@ -183,8 +190,11 @@ def uoc_decrypt(key, ciphertext):
     plaintext = ""
 
     #### IMPLEMENTATION GOES HERE ####
+    # we first decipher the text using the grille method built in exercise 5
     shifted_result = uoc_grille_decrypt(key, ciphertext)
+    # as per requirements of PR1, the sum of holes (ones inside the key array) is the shift value
     shift = sum(key)
+    # we then unshift the text using the already built method from exercise 2
     plaintext = uoc_rotative_decrypt(shifted_result, shift)
     # --------------------------------
 
