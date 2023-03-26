@@ -35,8 +35,8 @@ def uoc_rotative_encrypt(message, shift):
         print(f'char {char} ({unicode}) shifted {shift} --> {result} ({ord(result)})')
         ciphertext += result
 
-    # --------------------------------
     print(f'ciphertext {ciphertext}')
+    # --------------------------------
 
     return ciphertext
 
@@ -52,8 +52,14 @@ def uoc_rotative_decrypt(message, shift):
     plaintext = ""
 
     #### IMPLEMENTATION GOES HERE ####
+    for i in range(len(message)):
+        char = message[i]
+        unicode = ord(char)
+        result = chr(unicode - shift)
+        print(f'char {char} ({unicode}) shifted {shift} --> {result} ({ord(result)})')
+        plaintext += result
 
-
+    print(f'ciphertext {plaintext}')
     # --------------------------------
 
     return plaintext
