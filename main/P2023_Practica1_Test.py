@@ -45,19 +45,19 @@ class Test_Ex2(unittest.TestCase):
         ciphertext = "DEFG"
         expected_plaintext = "ABCD"
         plaintext = uoc_rotative_decrypt(ciphertext, 3)
-        self.assertEqual(plaintext, expected_plaintext)
+        self.assertEqual(expected_plaintext, plaintext)
 
     def test_2(self):
         ciphertext = "0X447A7 4W"
         expected_plaintext = "HELLOWORLD"
         plaintext = uoc_rotative_decrypt(ciphertext, 19)
-        self.assertEqual(plaintext, expected_plaintext)
+        self.assertEqual(expected_plaintext, plaintext)
 
     def test_3(self):
         ciphertext = "JXYTJXZSRJSXFOJZSUTVZNYTRFXQFWLTVZJJQFSYJWNTW"
         expected_plaintext = "ESTOESUNMENSAJEUNPOQUITOMASLARGOQUEELANTERIOR"
         plaintext = uoc_rotative_decrypt(ciphertext, 5)
-        self.assertEqual(plaintext, expected_plaintext)
+        self.assertEqual(expected_plaintext, plaintext)
 
 
 
@@ -67,7 +67,7 @@ class Test_Ex3(unittest.TestCase):
         grille_len = 10
         num_holes = 5
         key = uoc_grille_genkey(grille_len, num_holes)
-        self.assertEqual(len(key), grille_len)
+        self.assertEqual(grille_len, len(key))
         self.assertEqual(sum(key), num_holes)
 
     def test_2(self):

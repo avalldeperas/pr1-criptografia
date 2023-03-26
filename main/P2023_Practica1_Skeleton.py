@@ -30,10 +30,10 @@ def uoc_rotative_encrypt(message, shift):
     #### IMPLEMENTATION GOES HERE ####
     for i in range(len(message)):
         char = message[i]
-        unicode = ord(char)
-        shifted_unicode = unicode + shift
-        shifted_char = chr(shifted_unicode)
-        print(f'{char} ({unicode}) + {shift} --> {shifted_char} ({shifted_unicode})')
+        position = ABC.index(char)
+        shifted_position = (position + shift) % len(ABC)
+        shifted_char = ABC[shifted_position]
+        print(f'{char} ({position}) + {shift} --> {shifted_char} ({shifted_position})')
         ciphertext += shifted_char
 
     print(f'ciphertext {ciphertext}')
@@ -55,13 +55,13 @@ def uoc_rotative_decrypt(message, shift):
     #### IMPLEMENTATION GOES HERE ####
     for i in range(len(message)):
         char = message[i]
-        unicode = ord(char)
-        shifted_unicode = unicode - shift
-        shifted_char = chr(shifted_unicode)
-        print(f'{char} ({unicode}) - {shift} --> {shifted_char} ({shifted_unicode})')
+        position = ABC.index(char)
+        shifted_position = (position - shift) % len(ABC)
+        shifted_char = ABC[shifted_position]
+        print(f'{char} ({position}) + {shift} --> {shifted_char} ({shifted_position})')
         plaintext += shifted_char
 
-    print(f'ciphertext {plaintext}')
+    print(f'plaintext {plaintext}')
     # --------------------------------
 
     return plaintext
@@ -80,7 +80,7 @@ def uoc_grille_genkey(grille_len, num_holes):
     key = []
 
     #### IMPLEMENTATION GOES HERE ####
-
+    print(f'gruille_len = {grille_len} - num_holes = {num_holes}' )
 
     # --------------------------------
 
