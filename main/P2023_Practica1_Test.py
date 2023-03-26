@@ -23,19 +23,19 @@ class Test_Ex1(unittest.TestCase):
         plaintext = "ABCD"
         expected_ciphertext = "DEFG"
         ciphertext = uoc_rotative_encrypt(plaintext, 3)
-        self.assertEqual(ciphertext, expected_ciphertext)
+        self.assertEqual(expected_ciphertext, ciphertext)
 
     def test_2(self):
         plaintext = "HELLOWORLD"
         expected_ciphertext = "0X447A7 4W"
         ciphertext = uoc_rotative_encrypt(plaintext, 19)
-        self.assertEqual(ciphertext, expected_ciphertext)
+        self.assertEqual(expected_ciphertext, ciphertext)
 
     def test_3(self):
         plaintext = "ESTOESUNMENSAJEUNPOQUITOMASLARGOQUEELANTERIOR"
         expected_ciphertext = "JXYTJXZSRJSXFOJZSUTVZNYTRFXQFWLTVZJJQFSYJWNTW"
         ciphertext = uoc_rotative_encrypt(plaintext, 5)
-        self.assertEqual(ciphertext, expected_ciphertext)
+        self.assertEqual(expected_ciphertext, ciphertext)
 
 
 

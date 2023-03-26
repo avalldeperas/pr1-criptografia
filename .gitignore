@@ -1,1 +1,5 @@
 .idea
+*.pyc
+
+main/__pycache__/P2023_Practica1_Skeleton.cpython-39.pyc
+main/__pycache__/P2023_Practica1_Test.cpython-39.pyc
